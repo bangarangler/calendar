@@ -21,15 +21,15 @@ const eventObj = [
     id: 1,
     title: "All Day Event",
     allDay: true,
-    start: new Date(2019, 26, 9),
-    end: new Date(2019, 27, 9)
+    start: new Date(moment().add(1, "days")),
+    end: new Date(moment().add(1, "days"))
   },
   {
     id: 2,
     title: "Meeting with Bob",
     allDay: false,
-    start: new Date(2019, 27, 9),
-    end: new Date(moment().add(1, "hour"))
+    start: new Date(moment().add(2, "days")),
+    end: new Date(moment().add(2, "days", 1, "hours"))
   }
 ]
 
