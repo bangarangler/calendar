@@ -515,6 +515,7 @@ button.rbc-input::-moz-focus-inner {
   pointer-events: none; }
 
   /* OVERIDES */
+
   .rbc-header {
     padding: 3px 3px;
     font-size: 2rem;
@@ -533,6 +534,8 @@ button.rbc-input::-moz-focus-inner {
   }
 
   .rbc-toolbar {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
   }
 
   .rbc-toolbar-label {
@@ -557,9 +560,29 @@ button.rbc-input::-moz-focus-inner {
     margin: 6px 6px 0 6px;
     font-size: 1.5rem;
     padding: 2%;
+    border-radius: 5px;
   }
   .rbc-btn-group > button:hover {
     color: #13348b;
     background: white;
     border: 1px solid #13348b;
+    border-radius: 5px;
+  }
+  .rbc-btn-group > .rbc-active {
+    color: #13348b;
+    background-color: #dfebff !important;
+    font-weight: 700;
+    border: 1px solid #13348b !important;
+    border-radius: 5px;
+  }
+
+  .rbc-event-content {
+    color: white;
+    background-color: #13348b;
+    font-size: 1.4rem;
+    padding: 2px;
+  }
+
+  div.rbc-event {
+    background-color: #13348b;
   }
