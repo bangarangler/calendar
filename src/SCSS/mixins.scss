@@ -1,0 +1,40 @@
+// CENTER WITH FLEXBOX
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// GIVE IT JUSTIFY-CONTENT AND ALIGN-ITEMS TO GO
+@mixin custom-layout($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius
+}
+
+@mixin custom-btn($width, $height, $color, $bg-color) {
+  width: $width;
+  height: $height;
+  color: $color;
+  background: $bg-color;
+  cursor: pointer;
+
+  &:hover {
+    color: $bg-color;
+    background-color: $color;
+    border: 1px solid $bg-color;
+  }
+}
+
+@mixin grid($display, $gtc, $gtr, $gg) {
+  display: grid;
+  grid-template-columns: $gtc;
+  grid-template-rows: $gtr;
+  grid-gap: $gg;
+}
