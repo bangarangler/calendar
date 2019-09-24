@@ -58,7 +58,7 @@ const NowCalendar = props => {
         onEventResize={onEventResize}
         resizable
         localizer={localizer}
-        style={{height: "100vh", width: '90%', margin: '0 auto', boxShadow: "1px 4px 6px 0"}}
+        style={{height: "95vh", width: '90%', margin: '1% auto', boxShadow: "0 5px 20px #3d3d3d"}}
       />
     </div>
   );
