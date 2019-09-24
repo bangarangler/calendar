@@ -1,9 +1,10 @@
 import React from 'react';
+import NowCalendar from './components/NowCalendar.js';
 
 function App() {
   return (
     <div className="App">
-      <p>calendar</p>
+      <NowCalendar />
     </div>
   );
 }
