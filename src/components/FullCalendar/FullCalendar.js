@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from "@fullcalendar/daygrid"
-import { fetchData, getEvents } from '../../utils/fetchEvents.js'
+import React, {useState, useEffect} from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import {fetchData, getEvents} from '../../utils/fetchEvents.js';
 import moment from 'moment';
 
-import './main.scss'
+import SpringModal from '../Modal/Modal.js';
+
+import './main.scss';
 
 const Cal = props => {
   const eventObj = [
@@ -34,29 +37,60 @@ const Cal = props => {
       title: 'Video chat with Molly',
       allDay: false,
       start: new Date(),
-      end: new Date(moment().add(3, 'hours'))
+      end: new Date(moment().add(3, 'hours')),
     },
     {
       id: 4,
       title: 'Put it here',
       allDay: false,
       start: new Date(moment().subtract(6, 'days')),
-      end: new Date(moment().subtract(6, 'days'))
+      end: new Date(moment().subtract(6, 'days')),
     },
-  ]
-  const [events, setEvents] = useState(eventObj)
+  ];
+  const [events, setEvents] = useState(eventObj);
+  //const [showForm, setShowForm] = useState(false)
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   //const run = async () => {
-    //setEvents(await fetchData(getEvents))
+  //setEvents(await fetchData(getEvents))
   //}
 
   //useEffect(() => {
-    //run()
+  //run()
   //}, [])
+  const handleDateClick = arg => {
+    console.log(arg);
+    //setShowForm(true)
+    setOpen(true);
+  };
+
   return (
-    <FullCalendar defaultView="dayGridMonth" plugins={[ dayGridPlugin ]}
-    events={events}
-    />
-  )
-}
+    <>
+      <FullCalendar
+        defaultView="dayGridMonth"
+        plugins={[dayGridPlugin, interactionPlugin]}
+        dateClick={handleDateClick}
+        selectable="true"
+        //unselectAuto="true"
+        events={events}
+      />
+      {open && (
+        <SpringModal
+          open={open}
+          setOpen={setOpen}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+        />
+      )}
+    </>
+  );
+};
 
 export default Cal;
