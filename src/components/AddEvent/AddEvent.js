@@ -1,24 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   FormControl,
   InputLabel,
   Input,
   FormHelperText,
+  FormLabel,
   Radio,
+  RadioGroup,
+  FormControlLabel,
 } from '@material-ui/core';
 import styles from './AddEvent.module.scss';
 
 const AddEvent = props => {
-  const [allDay, setAllDay] = useState(false);
-  const [test, setTest] = useState(false)
-  const changeAllDay = () => {
-    setAllDay(!allDay)
-    console.log(allDay)
+  const [allDay, setAllDay] = useState('true');
+
+  const handleChange = e => {
+    setAllDay(e.target.value);
+    console.log(allDay);
   };
-  const testing = () => {
-    setTest(!test)
-    console.log(test)
-  }
+
   return (
     <div className={styles.formContainer}>
       <FormControl className={styles.form}>
@@ -60,17 +60,35 @@ const AddEvent = props => {
           What time does the event end?
         </FormHelperText>
       </FormControl>
-      <FormControl className={styles.form}>
-        <InputLabel htmlFor="allDay" className={styles.label}>
-          All Day Event?
-        </InputLabel>
-        <Radio
-          onChange={changeAllDay}
-          value="true"
-          color="default"
-          name="allDay"
-          inputProps={{'aria-label': 'true'}}
-        />
+      <FormControl component="fieldset" className={styles.form}>
+        <FormLabel component="legend" className={styles.legend}>
+          All day event?
+        </FormLabel>
+        <RadioGroup aria-label="position" name="start" row>
+          <FormControlLabel
+            control={
+              <Radio
+                checked={allDay === 'true'}
+                onChange={handleChange}
+                value="true"
+              />
+            }
+            label="No"
+            labelPlacement="start"
+          />
+          <FormControlLabel
+            value="start"
+            control={
+              <Radio
+                checked={allDay === 'false'}
+                onChange={handleChange}
+                value="false"
+              />
+            }
+            label="Yes"
+            labelPlacement="start"
+          />
+        </RadioGroup>
       </FormControl>
     </div>
   );
