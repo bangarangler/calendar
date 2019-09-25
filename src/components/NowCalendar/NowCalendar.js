@@ -40,6 +40,13 @@ const eventObj = [
     start: new Date(),
     end: new Date(moment().add(3, 'hours'))
   },
+  {
+    id: 4,
+    title: 'Put it here',
+    allDay: false,
+    start: new Date(moment().subtract(6, 'days')),
+    end: new Date(moment().subtract(6, 'days'))
+  },
 ];
 
 const NowCalendar = props => {
