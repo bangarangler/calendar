@@ -37,13 +37,14 @@ const eventObj = [
     id: 3,
     title: 'Video chat with Molly',
     allDay: false,
-    start: new Date(moment().subtract(4, 'days')),
+    start: new Date(),
     end: new Date(moment().add(3, 'hours'))
   },
 ];
 
 const NowCalendar = props => {
   const [events, setEvents] = useState(eventObj);
+  const [selectedDate, setSelectedDate] = useState(null)
   //const run = async () => {
     //setEvents(await fetchData(getEvents))
   //}
@@ -71,6 +72,9 @@ const NowCalendar = props => {
         onEventDrop={onEventDrop}
         onEventResize={onEventResize}
         resizable
+        selectable
+        date={selectedDate}
+        onNavigate={date => setSelectedDate(date)}
         localizer={localizer}
         style={{
           height: '95vh',
