@@ -80,7 +80,6 @@ const NowCalendar = props => {
           height: '95vh',
           width: '90%',
           margin: '1.5% auto',
-          boxShadow: '0 5px 20px #3d3d3d',
         }}
       />}
     </div>
