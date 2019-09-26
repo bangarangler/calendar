@@ -8,7 +8,11 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
+  Button,
 } from '@material-ui/core';
+
+import AddIcon from '@material-ui/icons/Add';
+
 import styles from './AddEvent.module.scss';
 
 const AddEvent = props => {
@@ -89,6 +93,10 @@ const AddEvent = props => {
             labelPlacement="start"
           />
         </RadioGroup>
+        <Button className={styles.addBtn} variant="contained" color="secondary">
+          Add Event
+          <AddIcon className={styles.icon}/>
+        </Button>
       </FormControl>
     </div>
   );
