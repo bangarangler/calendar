@@ -4,16 +4,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {fetchData, getEvents} from '../../utils/fetchEvents.js';
 import moment from 'moment';
-import { SpinnerContext, EventContext } from '../../context/allContexts'
+import {SpinnerContext, EventContext} from '../../context/allContexts';
 
 import SpringModal from '../Modal/Modal.js';
 
 import './main.scss';
 
 const Cal = props => {
-
-  const { events, setEvents } = useContext(EventContext)
-  const { Loader } = useContext(SpinnerContext)
+  const {events, setEvents} = useContext(EventContext);
+  const {Loader} = useContext(SpinnerContext);
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -24,12 +23,12 @@ const Cal = props => {
     setOpen(false);
   };
   const run = async () => {
-  setEvents(await fetchData(getEvents))
-  }
+    setEvents(await fetchData(getEvents));
+  };
 
   useEffect(() => {
-  run()
-  }, [])
+    run();
+  }, []);
 
   const handleDateClick = arg => {
     console.log(arg);
@@ -38,20 +37,27 @@ const Cal = props => {
 
   return (
     <>
-      {events.length > 0 ?
-      <FullCalendar
-        defaultView="dayGridMonth"
-        plugins={[dayGridPlugin, interactionPlugin]}
-        dateClick={handleDateClick}
-        selectable="true"
-        //unselectAuto="true"
-        events={events}
-        eventBackgroundColor='#13348b'
-        eventColor="#13348b"
-        eventBorderColor="white"
-        eventTextColor="#eee"
-        eventTimeFormat={{hour: 'numeric', minute: '2-digit', meridiem: 'short'}}
-      /> : Loader()}
+      {events.length > 0 ? (
+        <FullCalendar
+          defaultView="dayGridMonth"
+          plugins={[dayGridPlugin, interactionPlugin]}
+          dateClick={handleDateClick}
+          selectable="true"
+          //unselectAuto="true"
+          events={events}
+          eventBackgroundColor="#13348b"
+          eventColor="#13348b"
+          eventBorderColor="white"
+          eventTextColor="#eee"
+          eventTimeFormat={{
+            hour: 'numeric',
+            minute: '2-digit',
+            meridiem: 'short',
+          }}
+        />
+      ) : (
+        Loader()
+      )}
       {open && (
         <SpringModal
           open={open}

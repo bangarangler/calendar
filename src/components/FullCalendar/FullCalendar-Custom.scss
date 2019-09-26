@@ -1,5 +1,37 @@
+@import '../../SCSS/index.scss';
+
 .fc-left {
   h2 {
     font-size: 2.5rem;
+    margin-left: 15px;
+    margin-top: 20px;
+    font-family: $fontFam
   }
+}
+
+.fc-right {
+  margin-right: 15px;
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-family: $fontFam;
+}
+
+.fc-today-button:disabled {
+  text-transform: capitalize;
+}
+
+.fc .fc-row {
+  font-size: 2rem;
+  color: $primaryGrey;
+}
+
+.fc-day-number {
+  margin-top: 10px;
+  color: $primaryWhite;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: $primaryBlue;
+  padding: 3% !important;
+  text-align: center;
+  width: 25px;
 }
