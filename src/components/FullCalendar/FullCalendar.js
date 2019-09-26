@@ -47,8 +47,7 @@ const Cal = props => {
       end: new Date(moment().subtract(6, 'days')),
     },
   ];
-  const [events, setEvents] = useState(eventObj);
-  //const [showForm, setShowForm] = useState(false)
+  const [events, setEvents] = useState([]);
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -58,13 +57,13 @@ const Cal = props => {
   const handleClose = () => {
     setOpen(false);
   };
-  //const run = async () => {
-  //setEvents(await fetchData(getEvents))
-  //}
+  const run = async () => {
+  setEvents(await fetchData(getEvents))
+  }
 
-  //useEffect(() => {
-  //run()
-  //}, [])
+  useEffect(() => {
+  run()
+  }, [])
   const handleDateClick = arg => {
     console.log(arg);
     //setShowForm(true)

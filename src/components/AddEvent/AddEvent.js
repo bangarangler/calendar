@@ -17,7 +17,7 @@ import useFormState from '../../hooks/useFormState.js'
 import styles from './AddEvent.module.scss';
 
 const AddEvent = props => {
-  const [allDay, setAllDay] = useState('true');
+  const [allDay, setAllDay] = useState('false');
   const [event, setEvent, resetEvent] = useFormState("")
   const [start, setStart, resetStart] = useFormState("")
   const [end, setEnd, resetEnd] = useFormState("")
@@ -70,7 +70,7 @@ const AddEvent = props => {
           onChange={setStart}
         />
         <FormHelperText id="enter start time" className={styles.helperText}>
-          What time does the event start 'YYYY-MM-DD'?
+          What time does the event start? 'YYYY-MM-DD'
         </FormHelperText>
       </FormControl>
       <FormControl className={styles.form}>
@@ -85,7 +85,7 @@ const AddEvent = props => {
           onChange={setEnd}
         />
         <FormHelperText id="enter end time" className={styles.helperText}>
-          What time does the event end 'YYYY-MM-DD'?
+          What time does the event end? 'YYYY-MM-DD'
         </FormHelperText>
       </FormControl>
       <FormControl component="fieldset" className={styles.form}>
@@ -96,9 +96,9 @@ const AddEvent = props => {
           <FormControlLabel
             control={
               <Radio
-                checked={allDay === 'true'}
+                checked={allDay === 'false'}
                 onChange={handleChange}
-                value="true"
+                value="false"
               />
             }
             label="No"
@@ -108,9 +108,9 @@ const AddEvent = props => {
             value="start"
             control={
               <Radio
-                checked={allDay === 'false'}
+                checked={allDay === 'true'}
                 onChange={handleChange}
-                value="false"
+                value="true"
               />
             }
             label="Yes"
