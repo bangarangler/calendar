@@ -49,8 +49,7 @@ const Cal = props => {
     },
   ];
   const { events, setEvents } = useContext(EventContext)
-  const { loading, setLoading, Loader } = useContext(SpinnerContext)
-  //const [events, setEvents] = useState([]);
+  const { Loader } = useContext(SpinnerContext)
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {

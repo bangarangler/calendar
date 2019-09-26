@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import { EventContext } from '../../context/allContexts'
 import {
   FormControl,
   InputLabel,
@@ -17,10 +18,12 @@ import useFormState from '../../hooks/useFormState.js'
 import styles from './AddEvent.module.scss';
 
 const AddEvent = props => {
+  const { events, setEvents, addEvent } = useContext(EventContext)
   const [allDay, setAllDay] = useState('false');
-  const [event, setEvent, resetEvent] = useFormState("")
+  const [eventTitle, setEventTitle, resetEvent] = useFormState("")
   const [start, setStart, resetStart] = useFormState("")
   const [end, setEnd, resetEnd] = useFormState("")
+
 
   const reset = () => {
     resetEvent()
@@ -33,13 +36,22 @@ const AddEvent = props => {
     console.log(allDay);
   };
 
-  const handleAddEvent = () => {
-    console.log("Add event running")
-    console.log('event: ', event)
-    console.log('start: ', start)
-    console.log('end: ', end)
-    console.log('allDay: ', allDay)
+  let updateEvents;
+  const handleAddEvent = async () => {
+    let allDayEvent = allDay === "true" ? true : false
+    let eventBeingAdded = {
+      title: eventTitle,
+      start: start,
+      end: end,
+      allDay: allDayEvent
+    }
+    addEvent(eventBeingAdded)
   }
+  //useEffect((updateEvents) => {
+  //const updateStuff = (updateEvents) => {
+    //console.log(updateEvents)
+  //}
+  //}, [updateEvents, events])
 
   return (
     <div className={styles.formContainer}>
@@ -51,8 +63,9 @@ const AddEvent = props => {
           id="title"
           aria-describedby="my-helper-ext"
           className={styles.input}
-          value={event}
-          onChange={setEvent}
+          value={eventTitle}
+          onChange={setEventTitle}
+          required
         />
         <FormHelperText id="my-helper-text" className={styles.helperText}>
           What would you like to call your event?
@@ -68,6 +81,7 @@ const AddEvent = props => {
           className={styles.input}
           value={start}
           onChange={setStart}
+          required
         />
         <FormHelperText id="enter start time" className={styles.helperText}>
           What time does the event start? 'YYYY-MM-DD'
@@ -83,6 +97,7 @@ const AddEvent = props => {
           className={styles.input}
           value={end}
           onChange={setEnd}
+          required
         />
         <FormHelperText id="enter end time" className={styles.helperText}>
           What time does the event end? 'YYYY-MM-DD'
