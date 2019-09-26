@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {fetchData, getEvents} from '../../utils/fetchEvents.js';
 import moment from 'moment';
+import { SpinnerContext, EventContext } from '../../context/allContexts'
 
 import SpringModal from '../Modal/Modal.js';
 
@@ -47,7 +48,9 @@ const Cal = props => {
       end: new Date(moment().subtract(6, 'days')),
     },
   ];
-  const [events, setEvents] = useState([]);
+  const { events, setEvents } = useContext(EventContext)
+  const { loading, setLoading, Loader } = useContext(SpinnerContext)
+  //const [events, setEvents] = useState([]);
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -72,6 +75,7 @@ const Cal = props => {
 
   return (
     <>
+      {events.length > 0 ?
       <FullCalendar
         defaultView="dayGridMonth"
         plugins={[dayGridPlugin, interactionPlugin]}
@@ -79,7 +83,7 @@ const Cal = props => {
         selectable="true"
         //unselectAuto="true"
         events={events}
-      />
+      /> : Loader()}
       {open && (
         <SpringModal
           open={open}
