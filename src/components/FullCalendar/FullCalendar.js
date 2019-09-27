@@ -20,6 +20,7 @@ const Cal = props => {
 
   const handleOpen = () => {
     setOpen(true);
+    setViewModal(true)
   };
 
   const handleClose = () => {
@@ -48,6 +49,30 @@ const Cal = props => {
     setEventId(info.event._def.extendedProps._id)
     setViewModal(true)
   }
+
+  const display = () => {
+    let trigger;
+    if (viewModal) {
+      trigger = viewModal
+    } else if (open) {
+      trigger = open
+    } else {
+      trigger = open
+    }
+    return (<SpringModal
+      open={trigger}
+      setOpen={setOpen}
+      handleOpen={handleOpen}
+      handleClose={handleClose}
+    >
+      {viewModal && <UpdateEvent handleClose={handleClose} />}
+      {open && <AddEvent handleClose={handleClose} />}
+    </SpringModal>
+    )}
+  useEffect(() => {
+    display()
+  }, [open, viewModal])
+
 
   return (
     <>
@@ -81,28 +106,19 @@ const Cal = props => {
       ) : (
         Loader()
       )}
-      {open && (
-        <SpringModal
-          open={open}
-          setOpen={setOpen}
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-        >
-          <AddEvent handleClose={handleClose} />
-        </SpringModal>
-      )}
-          {viewModal && (
-            <SpringModal
-              open={viewModal}
-              setOpen={setViewModal}
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-            >
-              <UpdateEvent handleClose={handleClose} />
-            </SpringModal>
-          )}
+      {display()}
     </>
   );
 };
 
 export default Cal;
+//{viewModal && (
+  //<SpringModal
+    //open={viewModal}
+    //setOpen={setViewModal}
+    //handleOpen={handleOpen}
+    //handleClose={handleClose}
+  //>
+    //<UpdateEvent handleClose={handleClose} />
+  //</SpringModal>
+//)}
