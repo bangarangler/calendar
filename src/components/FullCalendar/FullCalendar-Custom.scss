@@ -1,11 +1,42 @@
 @import '../../SCSS/index.scss';
 
+.fc {
+  width: 90%;
+  margin: 1% auto;
+  box-shadow: 0 5px 20px #1d1d1d;
+  td.fc-today {
+    background: $calActiveColor;
+  }
+  .fc-head .fc-widget-header {
+    border-color: rgb(29, 29, 29);
+    border-color: rgba(29, 29, 29, .2);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+  }
+  .fc-widget-content {
+    border-color: rgb(29, 29, 29);
+    border-color: rgba(29, 29, 29, .2);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+  }
+}
+
 .fc-left {
+  margin-top: 20px;
+  margin-left: 15px;
+  font-family: $fontFam;
+  font-size: 1.5rem;
+  .fc-button-group .fc-button-primary {
+    background: $primaryBlue;
+  }
+}
+
+
+.fc-center {
   h2 {
-    font-size: 2.5rem;
-    margin-left: 15px;
     margin-top: 20px;
-    font-family: $fontFam
+    font-family: $fontFam;
+    font-size: 3.5rem;
   }
 }
 
@@ -14,10 +45,29 @@
   margin-top: 20px;
   font-size: 1.5rem;
   font-family: $fontFam;
+
+  .fc-dayGridDay-button {
+    font-family: $fontFam;
+    font-size: 1.5rem;
+    background: $primaryBlue;
+  }
+  .fc-dayGridMonth-button {
+    font-family: $fontFam;
+    font-size: 1.5rem;
+    background: $primaryBlue;
+
+  }
+  .fc-dayGridWeek-button {
+    font-family: $fontFam;
+    font-size: 1.5rem;
+    background: $primaryBlue;
+
+  }
 }
 
 .fc-today-button:disabled {
   text-transform: capitalize;
+  background: $primaryGrey;
 }
 
 .fc .fc-row {
