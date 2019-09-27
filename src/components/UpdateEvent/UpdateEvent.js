@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { EventContext } from '../../context/allContexts'
+import { EventContext, SpinnerContext } from '../../context/allContexts'
+import moment from 'moment'
 import {
   FormControl,
   InputLabel,
@@ -18,7 +19,8 @@ import useFormState from '../../hooks/useFormState.js'
 import styles from './UpdateEvent.module.scss';
 
 const UpdateEvent = props => {
-  const { events, setEvents } = useContext(EventContext)
+  const { events, eventId, eventToModify, setEventToModify, modifiedEventLoaded } = useContext(EventContext)
+  const { Loader } = useContext(SpinnerContext)
   const [allDay, setAllDay] = useState('false');
   const [eventTitle, setEventTitle, resetEvent] = useFormState("")
   const [start, setStart, resetStart] = useFormState("")
@@ -35,35 +37,34 @@ const UpdateEvent = props => {
     console.log(allDay);
   };
 
-  let updateEvents;
+  //let updateEvents;
   const handleUpdateEvent = async () => {
-    let allDayEvent = allDay === "true" ? true : false
-    let eventBeingAdded = {
-      title: eventTitle,
-      start: start,
-      end: end,
-      allDay: allDayEvent
+    console.log('handle update event fired!')
+    //let allDayEvent = allDay === "true" ? true : false
+    //let eventBeingAdded = {
+      //title: eventTitle,
+      //start: start,
+      //end: end,
+      //allDay: allDayEvent
     }
     //updateEvent(eventBeingAdded)
-  }
-  //useEffect((updateEvents) => {
-  //const updateStuff = (updateEvents) => {
-    //console.log(updateEvents)
   //}
-  //}, [updateEvents, events])
+  useEffect(() => {
+    modifiedEventLoaded()
+  }, [])
 
   return (
+    <>
+      {!eventToModify ? Loader() :
     <div className={styles.formContainer}>
       <FormControl className={styles.form}>
-        <InputLabel htmlFor="title" className={styles.label}>
-          Event Title
-        </InputLabel>
         <Input
           id="title"
           aria-describedby="my-helper-ext"
           className={styles.input}
           value={eventTitle}
           onChange={setEventTitle}
+          placeholder={`${eventToModify[0].title }`}
           required
         />
         <FormHelperText id="my-helper-text" className={styles.helperText}>
@@ -71,15 +72,13 @@ const UpdateEvent = props => {
         </FormHelperText>
       </FormControl>
       <FormControl className={styles.form}>
-        <InputLabel htmlFor="start" className={styles.label}>
-          Start Time
-        </InputLabel>
         <Input
           id="start"
           aria-describedby="enter start time"
           className={styles.input}
           value={start}
           onChange={setStart}
+          placeholder={`${moment(eventToModify[0].start).format('MMM Do YY')}`}
           required
         />
         <FormHelperText id="enter start time" className={styles.helperText}>
@@ -141,7 +140,8 @@ const UpdateEvent = props => {
           <AddIcon className={styles.icon} />
         </Button>
       </FormControl>
-    </div>
+    </div> }
+  </>
   );
 };
 

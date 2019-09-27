@@ -13,7 +13,7 @@ import UpdateEvent from '../UpdateEvent/UpdateEvent.js'
 import './main.scss';
 
 const Cal = props => {
-  const {events, setEvents} = useContext(EventContext);
+  const {events, setEvents, setEventId} = useContext(EventContext);
   const {Loader} = useContext(SpinnerContext);
   const [open, setOpen] = React.useState(false);
   const [viewModal, setViewModal] = React.useState(false)
@@ -45,8 +45,8 @@ const Cal = props => {
   }
 
   const handleEventClick = (info) => {
-    console.log(info.event._def.title)
-    console.log(info.event._def)
+    console.log("eventId: ", info.event._def.extendedProps._id)
+    setEventId(info.event._def.extendedProps._id)
     setViewModal(true)
   }
 

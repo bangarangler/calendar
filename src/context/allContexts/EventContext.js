@@ -5,6 +5,8 @@ export const EventContext = createContext()
 
 export function EventProvider(props) {
   const [events, setEvents] = useState([])
+  const [eventId, setEventId] = useState("")
+  const [eventToModify, setEventToModify] = useState(null)
 
   const addEvent = (eventToAdd) => {
     console.log('addEvent triggered')
@@ -25,12 +27,22 @@ export function EventProvider(props) {
     })
   }
 
+  const modifiedEventLoaded = async () => {
+    const selectedEvent = await events.filter(event => event._id === eventId)
+    setEventToModify(selectedEvent)
+  }
+
   return (
     <EventContext.Provider
       value={{
         events,
         setEvents,
-        addEvent
+        addEvent,
+        eventId,
+        setEventId,
+        eventToModify,
+        setEventToModify,
+        modifiedEventLoaded
       }}
     >
       {props.children}
