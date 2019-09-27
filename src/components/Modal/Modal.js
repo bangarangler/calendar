@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring';
-import AddEvent from '../AddEvent/AddEvent.js';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -43,7 +42,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function SpringModal({ open, setOpen, handleClose }) {
+export default function SpringModal({ open, setOpen, handleClose, children }) {
   const classes = useStyles();
 
   return (
@@ -61,7 +60,7 @@ export default function SpringModal({ open, setOpen, handleClose }) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <AddEvent />
+            {children}
           </div>
         </Fade>
       </Modal>

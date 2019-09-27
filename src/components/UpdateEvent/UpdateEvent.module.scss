@@ -1,0 +1,32 @@
+@import '../../SCSS/mixins.scss';
+
+.formContainer {
+  @include center();
+  flex-direction: column;
+  width: max-content;
+  align-items: flex-start;
+  justify-content: space-evenly;
+
+  .form {
+    .label {
+      font-size: 2rem;
+    }
+    .input {
+      font-size: 2rem;
+    }
+    .helperText {
+      font-size: 1.5rem;
+    }
+    .legend {
+      margin-top: 8px;
+      font-size: 1.7rem;
+    }
+  }
+}
+
+.addBtn {
+  .icon {
+    margin-left: 12px;
+  }
+}
+

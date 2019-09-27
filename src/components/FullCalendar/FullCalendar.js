@@ -7,6 +7,8 @@ import moment from 'moment';
 import {SpinnerContext, EventContext} from '../../context/allContexts';
 
 import SpringModal from '../Modal/Modal.js';
+import AddEvent from '../AddEvent/AddEvent.js'
+import UpdateEvent from '../UpdateEvent/UpdateEvent.js'
 
 import './main.scss';
 
@@ -14,6 +16,7 @@ const Cal = props => {
   const {events, setEvents} = useContext(EventContext);
   const {Loader} = useContext(SpinnerContext);
   const [open, setOpen] = React.useState(false);
+  const [viewModal, setViewModal] = React.useState(false)
 
   const handleOpen = () => {
     setOpen(true);
@@ -21,6 +24,7 @@ const Cal = props => {
 
   const handleClose = () => {
     setOpen(false);
+    setViewModal(false)
   };
   const run = async () => {
     setEvents(await fetchData(getEvents));
@@ -35,6 +39,17 @@ const Cal = props => {
     setOpen(true);
   };
 
+  const handleSelect = (info) => {
+    console.log('handleEventClickInfo runnin...')
+    console.log('event: ', info.view.title)
+  }
+
+  const handleEventClick = (info) => {
+    console.log(info.event._def.title)
+    console.log(info.event._def)
+    setViewModal(true)
+  }
+
   return (
     <>
       {events.length > 0 ? (
@@ -42,6 +57,8 @@ const Cal = props => {
           defaultView="dayGridMonth"
           plugins={[dayGridPlugin, interactionPlugin]}
           dateClick={handleDateClick}
+          select={handleSelect}
+          eventClick={handleEventClick}
           selectable="true"
           //unselectAuto="true"
           events={events}
@@ -55,6 +72,7 @@ const Cal = props => {
             meridiem: 'short',
           }}
           navLinks="true"
+          editabel="true"
           header={{
             left: 'prevYear,prev,next,nextYear today',
             center: 'title',
@@ -70,8 +88,20 @@ const Cal = props => {
           setOpen={setOpen}
           handleOpen={handleOpen}
           handleClose={handleClose}
-        />
+        >
+          <AddEvent />
+        </SpringModal>
       )}
+          {viewModal && (
+            <SpringModal
+              open={viewModal}
+              setOpen={setViewModal}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+            >
+              <UpdateEvent />
+            </SpringModal>
+          )}
     </>
   );
 };
