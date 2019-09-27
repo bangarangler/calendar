@@ -18,7 +18,7 @@ import AddIcon from '@material-ui/icons/Add';
 import useFormState from '../../hooks/useFormState.js';
 import styles from './UpdateEvent.module.scss';
 
-const UpdateEvent = props => {
+const UpdateEvent = ({ handleClose }) => {
   const {
     events,
     eventId,
@@ -58,6 +58,7 @@ const UpdateEvent = props => {
       allDay: allDayEvent,
     };
     updateEvent(eventBeingUpdated);
+    handleClose()
   };
 
   useEffect(() => {

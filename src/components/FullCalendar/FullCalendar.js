@@ -89,7 +89,7 @@ const Cal = props => {
           handleOpen={handleOpen}
           handleClose={handleClose}
         >
-          <AddEvent />
+          <AddEvent handleClose={handleClose} />
         </SpringModal>
       )}
           {viewModal && (
@@ -99,7 +99,7 @@ const Cal = props => {
               handleOpen={handleOpen}
               handleClose={handleClose}
             >
-              <UpdateEvent />
+              <UpdateEvent handleClose={handleClose} />
             </SpringModal>
           )}
     </>

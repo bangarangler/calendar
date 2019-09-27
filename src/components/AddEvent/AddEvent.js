@@ -17,7 +17,7 @@ import AddIcon from '@material-ui/icons/Add';
 import useFormState from '../../hooks/useFormState.js'
 import styles from './AddEvent.module.scss';
 
-const AddEvent = props => {
+const AddEvent = ({ handleClose }) => {
   const { events, setEvents, addEvent } = useContext(EventContext)
   const [allDay, setAllDay] = useState('false');
   const [eventTitle, setEventTitle, resetEvent] = useFormState("")
@@ -46,6 +46,7 @@ const AddEvent = props => {
       allDay: allDayEvent
     }
     addEvent(eventBeingAdded)
+    handleClose()
   }
   //useEffect((updateEvents) => {
   //const updateStuff = (updateEvents) => {
