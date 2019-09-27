@@ -23,9 +23,9 @@ const UpdateEvent = ({ handleClose }) => {
     events,
     eventId,
     eventToModify,
-    setEventToModify,
     modifiedEventLoaded,
     updateEvent,
+    deleteEvent
   } = useContext(EventContext);
   const {Loader} = useContext(SpinnerContext);
   const [allDay, setAllDay] = useState('false');
@@ -59,6 +59,12 @@ const UpdateEvent = ({ handleClose }) => {
     updateEvent(eventBeingUpdated);
     handleClose()
   };
+
+  const handleDeleteEvent = async () => {
+    console.log(eventId)
+    deleteEvent(eventId)
+    handleClose()
+  }
 
   useEffect(() => {
     modifiedEventLoaded();
@@ -151,6 +157,14 @@ const UpdateEvent = ({ handleClose }) => {
               color="secondary"
               onClick={handleUpdateEvent}>
               Update Event
+              <UpdateIcon className={styles.icon} />
+            </Button>
+            <Button
+              className={styles.addBtn}
+              variant="contained"
+              color="secondary"
+              onClick={handleDeleteEvent}>
+              Delete Event
               <UpdateIcon className={styles.icon} />
             </Button>
           </FormControl>

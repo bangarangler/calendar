@@ -13,7 +13,7 @@ import UpdateEvent from '../UpdateEvent/UpdateEvent.js'
 import './main.scss';
 
 const Cal = props => {
-  const {events, setEvents, setEventId} = useContext(EventContext);
+  const {events, setEvents, setEventId, deleteEvent} = useContext(EventContext);
   const {Loader} = useContext(SpinnerContext);
   const [open, setOpen] = React.useState(false);
   const [viewModal, setViewModal] = React.useState(false)
@@ -69,6 +69,7 @@ const Cal = props => {
       {open && <AddEvent handleClose={handleClose} />}
     </SpringModal>
     )}
+
   useEffect(() => {
     display()
   }, [open, viewModal])
@@ -76,7 +77,7 @@ const Cal = props => {
 
   return (
     <>
-      {events.length > 0 ? (
+      {events.length >= 0 ? (
         <FullCalendar
           defaultView="dayGridMonth"
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -112,13 +113,3 @@ const Cal = props => {
 };
 
 export default Cal;
-//{viewModal && (
-  //<SpringModal
-    //open={viewModal}
-    //setOpen={setViewModal}
-    //handleOpen={handleOpen}
-    //handleClose={handleClose}
-  //>
-    //<UpdateEvent handleClose={handleClose} />
-  //</SpringModal>
-//)}

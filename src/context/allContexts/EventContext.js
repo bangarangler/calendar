@@ -1,5 +1,5 @@
 import React, {useState, createContext} from 'react';
-import {postEvent, updateEventURL} from '../../utils/fetchEvents.js';
+import {postEvent, updateEventURL, eventToRemoveURL} from '../../utils/fetchEvents.js';
 
 export const EventContext = createContext();
 
@@ -59,6 +59,27 @@ export function EventProvider(props) {
       });
   }
 
+  const deleteEvent = (eventId) => {
+    const eventsToKeep = events.filter(event => event._id !== eventId)
+    console.log(eventsToKeep)
+    console.log('deleteEventTriggered')
+    console.log("id: ", eventId)
+    fetch(eventToRemoveURL + `${eventId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        console.log(res)
+        console.log(res.json())
+        setEvents(eventsToKeep)
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   return (
     <EventContext.Provider
       value={{
@@ -70,7 +91,8 @@ export function EventProvider(props) {
         eventToModify,
         setEventToModify,
         modifiedEventLoaded,
-        updateEvent
+        updateEvent,
+        deleteEvent
       }}>
       {props.children}
     </EventContext.Provider>
