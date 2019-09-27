@@ -54,6 +54,12 @@ const Cal = props => {
             minute: '2-digit',
             meridiem: 'short',
           }}
+          navLinks="true"
+          header={{
+            left: 'prevYear,prev,next,nextYear today',
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay',
+          }}
         />
       ) : (
         Loader()
