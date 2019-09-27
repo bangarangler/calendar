@@ -13,7 +13,7 @@ import {
   Button,
 } from '@material-ui/core';
 
-import AddIcon from '@material-ui/icons/Add';
+import UpdateIcon from '@material-ui/icons/Update';
 
 import useFormState from '../../hooks/useFormState.js';
 import styles from './UpdateEvent.module.scss';
@@ -44,7 +44,6 @@ const UpdateEvent = ({ handleClose }) => {
     console.log(allDay);
   };
 
-  //let updateEvents;
   const handleUpdateEvent = async () => {
     console.log('handle update event fired!');
     console.log(eventId);
@@ -152,7 +151,7 @@ const UpdateEvent = ({ handleClose }) => {
               color="secondary"
               onClick={handleUpdateEvent}>
               Update Event
-              <AddIcon className={styles.icon} />
+              <UpdateIcon className={styles.icon} />
             </Button>
           </FormControl>
         </div>

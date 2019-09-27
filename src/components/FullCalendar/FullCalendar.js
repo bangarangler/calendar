@@ -45,7 +45,6 @@ const Cal = props => {
   }
 
   const handleEventClick = (info) => {
-    console.log("eventId: ", info.event._def.extendedProps._id)
     setEventId(info.event._def.extendedProps._id)
     setViewModal(true)
   }

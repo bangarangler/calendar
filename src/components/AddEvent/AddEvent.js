@@ -24,7 +24,6 @@ const AddEvent = ({ handleClose }) => {
   const [start, setStart, resetStart] = useFormState("")
   const [end, setEnd, resetEnd] = useFormState("")
 
-
   const reset = () => {
     resetEvent()
     resetStart()
@@ -48,11 +47,6 @@ const AddEvent = ({ handleClose }) => {
     addEvent(eventBeingAdded)
     handleClose()
   }
-  //useEffect((updateEvents) => {
-  //const updateStuff = (updateEvents) => {
-    //console.log(updateEvents)
-  //}
-  //}, [updateEvents, events])
 
   return (
     <div className={styles.formContainer}>
