@@ -25,7 +25,7 @@ const UpdateEvent = props => {
     eventToModify,
     setEventToModify,
     modifiedEventLoaded,
-    updateEvent
+    updateEvent,
   } = useContext(EventContext);
   const {Loader} = useContext(SpinnerContext);
   const [allDay, setAllDay] = useState('false');
@@ -47,15 +47,18 @@ const UpdateEvent = props => {
   //let updateEvents;
   const handleUpdateEvent = async () => {
     console.log('handle update event fired!');
-    let allDayEvent = allDay === "true" ? true : false
+    console.log(eventId);
+    const oldEventObj = events.filter(event => eventId === event._id);
+    console.log('oldEvent: ', oldEventObj);
+    let allDayEvent = allDay === 'true' ? true : false;
     let eventBeingUpdated = {
-    title: eventTitle,
-    start: start,
-    end: end,
-    allDay: allDayEvent
+      title: eventTitle !== '' ? eventTitle : oldEventObj[0].title,
+      start: start !== '' ? start : oldEventObj[0].start,
+      end: end !== '' ? end : oldEventObj[0].end,
+      allDay: allDayEvent,
+    };
+    updateEvent(eventBeingUpdated);
   };
-  updateEvent(eventBeingUpdated)
-  }
 
   useEffect(() => {
     modifiedEventLoaded();
