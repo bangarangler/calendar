@@ -58,7 +58,7 @@ const TimeSelectionStart = ({startTest, setStartTest}) => {
 
   return (
     <div>
-      <DateTimePicker value={startTest = currentDayStart} onChange={(e) => handleDateChange(e)} />
+      <DateTimePicker value={startTest = currentDayStart} onChange={(e) => handleDateChange(e)} required={true} />
     </div>
   );
 };
