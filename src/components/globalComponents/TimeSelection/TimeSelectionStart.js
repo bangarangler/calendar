@@ -40,18 +40,24 @@ import MomentUtils from '@date-io/moment';
 import moment from 'moment'
 import {DateTimePicker} from '@material-ui/pickers';
 
-const TimeSelection = () => {
-  const [selectedDateTime, setSelectedDateTime] = useState(new Date(moment()));
+const TimeSelectionStart = ({startTest, setStartTest}) => {
+  //const [selectedDateTime, setSelectedDateTime] = useState(new Date(moment()));
 
   useEffect(() => {
-    console.log(moment(selectedDateTime._d).format())
-  }, [selectedDateTime])
+    //console.log(moment(selectedDateTime._d).format())
+    console.log(startTest)
+  }, [startTest])
+
+  const handleDateChange = (e) => {
+    // ex 2019-09-24T12:50:00-04:00
+    setStartTest(moment(e._d).format())
+  }
 
   return (
     <div>
-      <DateTimePicker value={selectedDateTime} onChange={setSelectedDateTime} />
+      <DateTimePicker value={startTest} onChange={(e) => handleDateChange(e)} />
     </div>
   );
 };
 
-export default TimeSelection;
+export default TimeSelectionStart;
