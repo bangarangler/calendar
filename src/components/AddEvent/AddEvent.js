@@ -42,8 +42,6 @@ const AddEvent = ({handleClose}) => {
 
   let updateEvents;
   const handleAddEvent = async () => {
-    console.log(startTest)
-    console.log(endTest)
     let allDayEvent = allDay === 'true' ? true : false;
     let eventBeingAdded = {
       title: eventTitle,

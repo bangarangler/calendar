@@ -13,7 +13,7 @@ import UpdateEvent from '../UpdateEvent/UpdateEvent.js'
 import './main.scss';
 
 const Cal = props => {
-  const {events, setEvents, setEventId, deleteEvent} = useContext(EventContext);
+  const {events, setEvents, setEventId, deleteEvent, currentDayStart, setCurrentDayStart, currentDayEnd, setCurrentDayEnd } = useContext(EventContext);
   const {Loader} = useContext(SpinnerContext);
   const [open, setOpen] = React.useState(false);
   const [viewModal, setViewModal] = React.useState(false)
@@ -37,6 +37,7 @@ const Cal = props => {
 
   const handleDateClick = arg => {
     console.log(arg);
+    //setInfo(arg)
     console.log(arg.dateStr)
     console.log(new Date(moment("2019-09-30T10:30:00")))
     setOpen(true);
@@ -44,12 +45,17 @@ const Cal = props => {
 
   const handleSelect = (info) => {
     console.log('handleEventClickInfo runnin...')
-    console.log('event: ', info.view.title)
-    console.log(info.view.title)
+    //console.log('event: ', info.view.title)
+    console.log("info", info)
+    setCurrentDayStart(info.startStr)
+    setCurrentDayEnd(info.endStr)
   }
 
   const handleEventClick = (info) => {
+    console.log("info: ", info)
     setEventId(info.event._def.extendedProps._id)
+    setCurrentDayStart(info.date)
+    setCurrentDayEnd(info.end)
     setViewModal(true)
   }
 

@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import MomentUtils from '@date-io/moment';
 import moment from 'moment'
 import {DateTimePicker} from '@material-ui/pickers';
+import { EventContext } from '../../../context/allContexts'
 
 const TimeSelectionEnd = ({endTest, setEndTest}) => {
+  const { currentDayEnd } = useContext(EventContext);
   //const [selectedDateTime, setSelectedDateTime] = useState(new Date(moment()));
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const TimeSelectionEnd = ({endTest, setEndTest}) => {
 
   return (
     <div>
-      <DateTimePicker value={endTest} onChange={e => handleDateChange(e)} />
+      <DateTimePicker value={endTest = currentDayEnd} onChange={e => handleDateChange(e)} />
     </div>
   );
 };

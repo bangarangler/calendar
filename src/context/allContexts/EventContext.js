@@ -7,6 +7,8 @@ export function EventProvider(props) {
   const [events, setEvents] = useState([]);
   const [eventId, setEventId] = useState('');
   const [eventToModify, setEventToModify] = useState(null);
+  const [ currentDayStart, setCurrentDayStart ] = useState(null);
+  const [ currentDayEnd, setCurrentDayEnd ] = useState(null)
 
   const addEvent = eventToAdd => {
     console.log('addEvent triggered');
@@ -92,7 +94,11 @@ export function EventProvider(props) {
         setEventToModify,
         modifiedEventLoaded,
         updateEvent,
-        deleteEvent
+        deleteEvent,
+        currentDayStart,
+        setCurrentDayStart,
+        currentDayEnd,
+        setCurrentDayEnd
       }}>
       {props.children}
     </EventContext.Provider>
