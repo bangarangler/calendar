@@ -38,6 +38,7 @@ const Cal = props => {
   const handleDateClick = arg => {
     console.log(arg);
     console.log(arg.dateStr)
+    console.log(new Date(moment("2019-09-30T10:30:00")))
     setOpen(true);
   };
 
@@ -87,6 +88,12 @@ const Cal = props => {
           select={handleSelect}
           eventClick={handleEventClick}
           selectable="true"
+          axisFormat="H:mm"
+          slotDuration="00:30:00"
+          snapDuration="00:30:00"
+          scrollTime="06:00:00"
+          minTime="00:00:00"
+          maxTime="24:00:00"
           //unselectAuto="true"
           events={events}
           eventBackgroundColor="#13348b"
@@ -100,6 +107,7 @@ const Cal = props => {
           }}
           navLinks="true"
           editabel="true"
+          droppable="true"
           header={{
             left: 'prevYear,prev,next,nextYear today',
             center: 'title',
