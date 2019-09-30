@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 
 import UpdateIcon from '@material-ui/icons/Update';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 import useFormState from '../../hooks/useFormState.js';
 import styles from './UpdateEvent.module.scss';
@@ -151,22 +152,24 @@ const UpdateEvent = ({ handleClose }) => {
                 labelPlacement="start"
               />
             </RadioGroup>
+            <div className={styles.buttonContainer}>
             <Button
               className={styles.addBtn}
               variant="contained"
-              color="secondary"
+              color="primary"
               onClick={handleUpdateEvent}>
               Update Event
               <UpdateIcon className={styles.icon} />
             </Button>
             <Button
-              className={styles.addBtn}
+              className={styles.removeButton}
               variant="contained"
               color="secondary"
               onClick={handleDeleteEvent}>
               Delete Event
-              <UpdateIcon className={styles.icon} />
+              <HighlightOffIcon className={styles.icon} />
             </Button>
+          </div>
           </FormControl>
         </div>
       )}

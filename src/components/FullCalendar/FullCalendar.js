@@ -37,12 +37,14 @@ const Cal = props => {
 
   const handleDateClick = arg => {
     console.log(arg);
+    console.log(arg.dateStr)
     setOpen(true);
   };
 
   const handleSelect = (info) => {
     console.log('handleEventClickInfo runnin...')
     console.log('event: ', info.view.title)
+    console.log(info.view.title)
   }
 
   const handleEventClick = (info) => {
