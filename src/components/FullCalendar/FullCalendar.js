@@ -46,9 +46,11 @@ const Cal = props => {
   const handleSelect = (info) => {
     console.log('handleEventClickInfo runnin...')
     //console.log('event: ', info.view.title)
-    console.log("info", info)
-    setCurrentDayStart(info.startStr)
-    setCurrentDayEnd(info.endStr)
+    //console.log(moment(new Date(info.startStr).toISOString()).format('LT'))
+    console.log(moment(info.startStr).add(8, 'hours').format())
+    //setCurrentDayStart(moment(new Date(info.startStr).toISOString()))
+    setCurrentDayStart(moment(info.startStr).add(8, 'hours').format())
+    setCurrentDayEnd(moment(info.endStr).subtract(4, 'hours').format())
   }
 
   const handleEventClick = (info) => {

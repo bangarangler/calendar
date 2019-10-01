@@ -21,7 +21,7 @@ import useFormState from '../../hooks/useFormState.js';
 import styles from './AddEvent.module.scss';
 
 const AddEvent = ({handleClose}) => {
-  const {events, setEvents, addEvent} = useContext(EventContext);
+  const {events, setEvents, addEvent, currentDayStart, currentDayEnd} = useContext(EventContext);
   const [allDay, setAllDay] = useState('false');
   const [eventTitle, setEventTitle, resetEvent] = useFormState('');
   const [start, setStart, resetStart] = useFormState('');
@@ -45,8 +45,8 @@ const AddEvent = ({handleClose}) => {
     let allDayEvent = allDay === 'true' ? true : false;
     let eventBeingAdded = {
       title: eventTitle,
-      start: startTest,
-      end: endTest,
+      start: startTest ? startTest : currentDayStart,
+      end: endTest ? endTest : currentDayEnd,
       allDay: allDayEvent,
     };
     addEvent(eventBeingAdded);
