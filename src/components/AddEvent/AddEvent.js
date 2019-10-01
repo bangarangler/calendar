@@ -26,8 +26,8 @@ const AddEvent = ({handleClose}) => {
   const [eventTitle, setEventTitle, resetEvent] = useFormState('');
   const [start, setStart, resetStart] = useFormState('');
   const [end, setEnd, resetEnd] = useFormState('');
-  const [startTest, setStartTest] = useState(new Date(moment().format()));
-  const [endTest, setEndTest] = useState(new Date(moment().format()));
+  const [startTest, setStartTest] = useState(null);
+  const [endTest, setEndTest] = useState(null);
 
   const reset = () => {
     resetEvent();
@@ -40,7 +40,7 @@ const AddEvent = ({handleClose}) => {
     console.log(allDay);
   };
 
-  let updateEvents;
+  //let updateEvents;
   const handleAddEvent = async () => {
     let allDayEvent = allDay === 'true' ? true : false;
     let eventBeingAdded = {

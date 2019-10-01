@@ -5,7 +5,7 @@ import {DateTimePicker} from '@material-ui/pickers';
 import { EventContext } from '../../../context/allContexts'
 
 const TimeSelectionEnd = ({endTest, setEndTest}) => {
-  const { currentDayEnd } = useContext(EventContext);
+  const { currentDayEnd, setCurrentDayEnd } = useContext(EventContext);
   //const [selectedDateTime, setSelectedDateTime] = useState(new Date(moment()));
 
   useEffect(() => {
@@ -14,12 +14,13 @@ const TimeSelectionEnd = ({endTest, setEndTest}) => {
   }, [endTest])
 
   const handleDateChange = (e) => {
+    setCurrentDayEnd(moment(e._d).format())
     setEndTest(moment(e._d).format())
   }
 
   return (
     <div>
-      <DateTimePicker value={endTest = currentDayEnd} onChange={e => handleDateChange(e)} />
+      <DateTimePicker value={endTest = currentDayEnd} onChange={e => handleDateChange(e)} required={true} />
     </div>
   );
 };

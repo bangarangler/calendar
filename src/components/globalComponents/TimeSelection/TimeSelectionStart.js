@@ -42,7 +42,7 @@ import {DateTimePicker} from '@material-ui/pickers';
 import { EventContext } from '../../../context/allContexts/'
 
 const TimeSelectionStart = ({startTest, setStartTest}) => {
-  const { currentDayStart, currentDayEnd } = useContext(EventContext)
+  const { currentDayStart, setCurrentDayStart} = useContext(EventContext)
   //const [selectedDateTime, setSelectedDateTime] = useState(new Date(moment()));
 
   useEffect(() => {
@@ -52,7 +52,9 @@ const TimeSelectionStart = ({startTest, setStartTest}) => {
   }, [startTest, currentDayStart])
 
   const handleDateChange = (e) => {
+    console.log(e._d)
     // ex 2019-09-24T12:50:00-04:00
+    setCurrentDayStart(moment(e._d).format())
     setStartTest(moment(e._d).format())
   }
 
