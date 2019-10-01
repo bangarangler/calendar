@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {EventContext, SpinnerContext} from '../../context/allContexts';
-import moment from 'moment';
+import TimeSelectionStart from '../globalComponents/TimeSelection/TimeSelectionStart.js'
+import TimeSelectionEnd from '../globalComponents/TimeSelection/TimeSelectionEnd.js'
+//import moment from 'moment';
 import {
   FormControl,
-  InputLabel,
   Input,
   FormHelperText,
   FormLabel,
@@ -31,30 +32,29 @@ const UpdateEvent = ({ handleClose }) => {
   const {Loader} = useContext(SpinnerContext);
   const [allDay, setAllDay] = useState('false');
   const [eventTitle, setEventTitle, resetEvent] = useFormState('');
-  const [start, setStart, resetStart] = useFormState('');
-  const [end, setEnd, resetEnd] = useFormState('');
+  const [start, setStart] = useState(null)
+  const [end, setEnd] = useState(null)
 
-  const reset = () => {
-    resetEvent();
-    resetStart();
-    resetEnd();
-  };
+  //const reset = () => {
+    //resetEvent();
+    ////resetStart();
+    ////resetEnd();
+  //};
 
   const handleChange = e => {
     setAllDay(e.target.value);
-    console.log(allDay);
   };
 
   const handleUpdateEvent = async () => {
     console.log('handle update event fired!');
-    console.log(eventId);
+    //console.log(eventId);
     const oldEventObj = events.filter(event => eventId === event._id);
-    console.log('oldEvent: ', oldEventObj);
+    //console.log('oldEvent: ', oldEventObj);
     let allDayEvent = allDay === 'true' ? true : false;
     let eventBeingUpdated = {
       title: eventTitle !== '' ? eventTitle : oldEventObj[0].title,
-      start: start !== '' ? start : oldEventObj[0].start,
-      end: end !== '' ? end : oldEventObj[0].end,
+      start: start !== oldEventObj[0].start ? start : oldEventObj[0].start,
+      end: end !== oldEventObj[0].end ? end : oldEventObj[0].end,
       allDay: allDayEvent,
     };
     updateEvent(eventBeingUpdated);
@@ -62,7 +62,7 @@ const UpdateEvent = ({ handleClose }) => {
   };
 
   const handleDeleteEvent = async () => {
-    console.log(eventId)
+    //console.log(eventId)
     deleteEvent(eventId)
     handleClose()
   }
@@ -92,35 +92,15 @@ const UpdateEvent = ({ handleClose }) => {
             </FormHelperText>
           </FormControl>
           <FormControl className={styles.form}>
-            <Input
-              id="start"
-              aria-describedby="enter start time"
-              className={styles.input}
-              value={start}
-              onChange={setStart}
-              placeholder={`${moment(eventToModify[0].start).format(
-                'MMM Do YY',
-              )}`}
-              required
-            />
+        <TimeSelectionStart start={start} setStart={setStart} />
             <FormHelperText id="enter start time" className={styles.helperText}>
-              Update event start time? 'YYYY-MM-DD'
+              Update event start time?
             </FormHelperText>
           </FormControl>
           <FormControl className={styles.form}>
-            <Input
-              id="end"
-              aria-describedby="enter end time"
-              className={styles.input}
-              value={end}
-              onChange={setEnd}
-              placeholder={`${moment(eventToModify[0].end).format(
-                'MMM Do YY',
-              )}`}
-              required
-            />
+        <TimeSelectionEnd end={end} setEnd={setEnd} />
             <FormHelperText id="enter end time" className={styles.helperText}>
-              Update event end time? 'YYYY-MM-DD'
+              Update event end time?
             </FormHelperText>
           </FormControl>
           <FormControl component="fieldset" className={styles.form}>

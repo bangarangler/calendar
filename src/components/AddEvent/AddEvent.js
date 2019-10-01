@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react';
-import { EventContext } from '../../context/allContexts'
+import React, {useState, useContext} from 'react';
+import {EventContext} from '../../context/allContexts';
+//import moment from 'moment';
 import {
   FormControl,
   InputLabel,
@@ -13,41 +14,40 @@ import {
 } from '@material-ui/core';
 
 import AddIcon from '@material-ui/icons/Add';
-import TimeSelection from '../globalComponents/TimeSelection/TimeSelection.js'
+import TimeSelectionStart from '../globalComponents/TimeSelection/TimeSelectionStart.js';
+import TimeSelectionEnd from '../globalComponents/TimeSelection/TimeSelectionEnd.js';
 
-import useFormState from '../../hooks/useFormState.js'
+import useFormState from '../../hooks/useFormState.js';
 import styles from './AddEvent.module.scss';
 
-const AddEvent = ({ handleClose }) => {
-  const { events, setEvents, addEvent } = useContext(EventContext)
+const AddEvent = ({handleClose}) => {
+  const {addEvent, currentDayStart, currentDayEnd} = useContext(EventContext);
   const [allDay, setAllDay] = useState('false');
-  const [eventTitle, setEventTitle, resetEvent] = useFormState("")
-  const [start, setStart, resetStart] = useFormState("")
-  const [end, setEnd, resetEnd] = useFormState("")
+  const [eventTitle, setEventTitle, resetEvent] = useFormState('');
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
 
-  const reset = () => {
-    resetEvent()
-    resetStart()
-    resetEnd()
-  }
+  //const reset = () => {
+    //resetEvent();
+  //};
 
   const handleChange = e => {
     setAllDay(e.target.value);
     console.log(allDay);
   };
 
-  let updateEvents;
+  //let updateEvents;
   const handleAddEvent = async () => {
-    let allDayEvent = allDay === "true" ? true : false
+    let allDayEvent = allDay === 'true' ? true : false;
     let eventBeingAdded = {
       title: eventTitle,
-      start: start,
-      end: end,
-      allDay: allDayEvent
-    }
-    addEvent(eventBeingAdded)
-    handleClose()
-  }
+      start: start ? start : currentDayStart,
+      end: end ? end : currentDayEnd,
+      allDay: allDayEvent,
+    };
+    addEvent(eventBeingAdded);
+    handleClose();
+  };
 
   return (
     <div className={styles.formContainer}>
@@ -68,35 +68,15 @@ const AddEvent = ({ handleClose }) => {
         </FormHelperText>
       </FormControl>
       <FormControl className={styles.form}>
-        <InputLabel htmlFor="start" className={styles.label}>
-          Start Time
-        </InputLabel>
-        <Input
-          id="start"
-          aria-describedby="enter start time"
-          className={styles.input}
-          value={start}
-          onChange={setStart}
-          required
-        />
+        <TimeSelectionStart start={start} setStart={setStart} />
         <FormHelperText id="enter start time" className={styles.helperText}>
-          What time does the event start? 'YYYY-MM-DD'
+          What time does the event start?
         </FormHelperText>
       </FormControl>
       <FormControl className={styles.form}>
-        <InputLabel htmlFor="end" className={styles.label}>
-          End Time
-        </InputLabel>
-        <Input
-          id="end"
-          aria-describedby="enter end time"
-          className={styles.input}
-          value={end}
-          onChange={setEnd}
-          required
-        />
+        <TimeSelectionEnd end={end} setEnd={setEnd} />
         <FormHelperText id="enter end time" className={styles.helperText}>
-          What time does the event end? 'YYYY-MM-DD'
+          What time does the event end?
         </FormHelperText>
       </FormControl>
       <FormControl component="fieldset" className={styles.form}>
@@ -132,8 +112,7 @@ const AddEvent = ({ handleClose }) => {
           className={styles.addBtn}
           variant="contained"
           color="primary"
-          onClick={handleAddEvent}
-        >
+          onClick={handleAddEvent}>
           Add Event
           <AddIcon className={styles.icon} />
         </Button>
