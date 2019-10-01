@@ -54,10 +54,10 @@ const Cal = props => {
   }
 
   const handleEventClick = (info) => {
-    console.log("info: ", info.event._instance.range.start)
+    console.log("info: ", moment(info.event._instance.range.start).add(8, 'hours').format())
     setEventId(info.event._def.extendedProps._id)
-    setCurrentDayStart(info.event._instance.range.start)
-    setCurrentDayEnd(info.event._instance.range.end)
+    setCurrentDayStart(moment(info.event._instance.range.start).add(4, 'hours').format())
+    setCurrentDayEnd(moment(info.event._instance.range.end).add(4, 'hours').format())
     setViewModal(true)
   }
 

@@ -1,5 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {EventContext, SpinnerContext} from '../../context/allContexts';
+import TimeSelectionStart from '../globalComponents/TimeSelection/TimeSelectionStart.js'
+import TimeSelectionEnd from '../globalComponents/TimeSelection/TimeSelectionEnd.js'
 import moment from 'moment';
 import {
   FormControl,
@@ -31,13 +33,15 @@ const UpdateEvent = ({ handleClose }) => {
   const {Loader} = useContext(SpinnerContext);
   const [allDay, setAllDay] = useState('false');
   const [eventTitle, setEventTitle, resetEvent] = useFormState('');
-  const [start, setStart, resetStart] = useFormState('');
-  const [end, setEnd, resetEnd] = useFormState('');
+  //const [start, setStart, resetStart] = useFormState('');
+  //const [end, setEnd, resetEnd] = useFormState('');
+  const [startTest, setStartTest] = useState(null)
+  const [endTest, setEndTest] = useState(null)
 
   const reset = () => {
     resetEvent();
-    resetStart();
-    resetEnd();
+    //resetStart();
+    //resetEnd();
   };
 
   const handleChange = e => {
@@ -53,8 +57,8 @@ const UpdateEvent = ({ handleClose }) => {
     let allDayEvent = allDay === 'true' ? true : false;
     let eventBeingUpdated = {
       title: eventTitle !== '' ? eventTitle : oldEventObj[0].title,
-      start: start !== '' ? start : oldEventObj[0].start,
-      end: end !== '' ? end : oldEventObj[0].end,
+      start: startTest !== oldEventObj[0].start ? startTest : oldEventObj[0].start,
+      end: endTest !== oldEventObj[0].end ? endTest : oldEventObj[0].end,
       allDay: allDayEvent,
     };
     updateEvent(eventBeingUpdated);
@@ -92,33 +96,13 @@ const UpdateEvent = ({ handleClose }) => {
             </FormHelperText>
           </FormControl>
           <FormControl className={styles.form}>
-            <Input
-              id="start"
-              aria-describedby="enter start time"
-              className={styles.input}
-              value={start}
-              onChange={setStart}
-              placeholder={`${moment(eventToModify[0].start).format(
-                'MMM Do YY',
-              )}`}
-              required
-            />
+        <TimeSelectionStart startTest={startTest} setStartTest={setStartTest} />
             <FormHelperText id="enter start time" className={styles.helperText}>
               Update event start time? 'YYYY-MM-DD'
             </FormHelperText>
           </FormControl>
           <FormControl className={styles.form}>
-            <Input
-              id="end"
-              aria-describedby="enter end time"
-              className={styles.input}
-              value={end}
-              onChange={setEnd}
-              placeholder={`${moment(eventToModify[0].end).format(
-                'MMM Do YY',
-              )}`}
-              required
-            />
+        <TimeSelectionEnd endTest={endTest} setEndTest={setEndTest} />
             <FormHelperText id="enter end time" className={styles.helperText}>
               Update event end time? 'YYYY-MM-DD'
             </FormHelperText>
@@ -178,3 +162,25 @@ const UpdateEvent = ({ handleClose }) => {
 };
 
 export default UpdateEvent;
+//<Input
+  //id="start"
+  //aria-describedby="enter start time"
+  //className={styles.input}
+  //value={start}
+  //onChange={setStart}
+  //placeholder={`${moment(eventToModify[0].start).format(
+    //'MMM Do YY',
+  //)}`}
+  //required
+///>
+//<Input
+  //id="end"
+  //aria-describedby="enter end time"
+  //className={styles.input}
+  //value={end}
+  //onChange={setEnd}
+  //placeholder={`${moment(eventToModify[0].end).format(
+    //'MMM Do YY',
+  //)}`}
+  //required
+///>
