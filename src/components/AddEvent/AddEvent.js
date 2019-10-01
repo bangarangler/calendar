@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {EventContext} from '../../context/allContexts';
-import moment from 'moment';
+//import moment from 'moment';
 import {
   FormControl,
   InputLabel,
@@ -21,19 +21,15 @@ import useFormState from '../../hooks/useFormState.js';
 import styles from './AddEvent.module.scss';
 
 const AddEvent = ({handleClose}) => {
-  const {events, setEvents, addEvent, currentDayStart, currentDayEnd} = useContext(EventContext);
+  const {addEvent, currentDayStart, currentDayEnd} = useContext(EventContext);
   const [allDay, setAllDay] = useState('false');
   const [eventTitle, setEventTitle, resetEvent] = useFormState('');
-  const [start, setStart, resetStart] = useFormState('');
-  const [end, setEnd, resetEnd] = useFormState('');
-  const [startTest, setStartTest] = useState(null);
-  const [endTest, setEndTest] = useState(null);
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
 
-  const reset = () => {
-    resetEvent();
-    resetStart();
-    resetEnd();
-  };
+  //const reset = () => {
+    //resetEvent();
+  //};
 
   const handleChange = e => {
     setAllDay(e.target.value);
@@ -45,8 +41,8 @@ const AddEvent = ({handleClose}) => {
     let allDayEvent = allDay === 'true' ? true : false;
     let eventBeingAdded = {
       title: eventTitle,
-      start: startTest ? startTest : currentDayStart,
-      end: endTest ? endTest : currentDayEnd,
+      start: start ? start : currentDayStart,
+      end: end ? end : currentDayEnd,
       allDay: allDayEvent,
     };
     addEvent(eventBeingAdded);
@@ -72,13 +68,13 @@ const AddEvent = ({handleClose}) => {
         </FormHelperText>
       </FormControl>
       <FormControl className={styles.form}>
-        <TimeSelectionStart startTest={startTest} setStartTest={setStartTest} />
+        <TimeSelectionStart start={start} setStart={setStart} />
         <FormHelperText id="enter start time" className={styles.helperText}>
           What time does the event start?
         </FormHelperText>
       </FormControl>
       <FormControl className={styles.form}>
-        <TimeSelectionEnd endTest={endTest} setEndTest={setEndTest} />
+        <TimeSelectionEnd end={end} setEnd={setEnd} />
         <FormHelperText id="enter end time" className={styles.helperText}>
           What time does the event end?
         </FormHelperText>
@@ -126,22 +122,3 @@ const AddEvent = ({handleClose}) => {
 };
 
 export default AddEvent;
-//<InputLabel htmlFor="start" className={styles.label}>
-//Start Time
-//</InputLabel>
-//<Input
-//id="start"
-//aria-describedby="enter start time"
-//className={styles.input}
-//value={start}
-//onChange={setStart}
-//required
-///>
-//<Input
-  //id="end"
-  //aria-describedby="enter end time"
-  //className={styles.input}
-  //value={end}
-  //onChange={setEnd}
-  //required
-///>

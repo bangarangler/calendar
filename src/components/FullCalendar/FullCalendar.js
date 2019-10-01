@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useEffect, useContext} from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -13,7 +13,7 @@ import UpdateEvent from '../UpdateEvent/UpdateEvent.js'
 import './main.scss';
 
 const Cal = props => {
-  const {events, setEvents, setEventId, deleteEvent, currentDayStart, setCurrentDayStart, currentDayEnd, setCurrentDayEnd } = useContext(EventContext);
+  const {events, setEvents, setEventId, setCurrentDayStart,  setCurrentDayEnd } = useContext(EventContext);
   const {Loader} = useContext(SpinnerContext);
   const [open, setOpen] = React.useState(false);
   const [viewModal, setViewModal] = React.useState(false)
@@ -37,24 +37,15 @@ const Cal = props => {
 
   const handleDateClick = arg => {
     console.log(arg);
-    //setInfo(arg)
-    console.log(arg.dateStr)
-    console.log(new Date(moment("2019-09-30T10:30:00")))
     setOpen(true);
   };
 
   const handleSelect = (info) => {
-    console.log('handleEventClickInfo runnin...')
-    //console.log('event: ', info.view.title)
-    //console.log(moment(new Date(info.startStr).toISOString()).format('LT'))
-    console.log(moment(info.startStr).add(8, 'hours').format())
-    //setCurrentDayStart(moment(new Date(info.startStr).toISOString()))
     setCurrentDayStart(moment(info.startStr).add(8, 'hours').format())
     setCurrentDayEnd(moment(info.endStr).subtract(4, 'hours').format())
   }
 
   const handleEventClick = (info) => {
-    console.log("info: ", moment(info.event._instance.range.start).add(8, 'hours').format())
     setEventId(info.event._def.extendedProps._id)
     setCurrentDayStart(moment(info.event._instance.range.start).add(4, 'hours').format())
     setCurrentDayEnd(moment(info.event._instance.range.end).add(4, 'hours').format())
